@@ -246,41 +246,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- Your Name - Initial work
-
-## 🙏 Acknowledgments
-
-- Thanks to all contributors who have helped shape this project
-- Special thanks to the open-source community for the tools and libraries used
-- TensorFlow/PyTorch community for ML models and resources
-- OpenCV community for computer vision tools
-- React and FastAPI communities for excellent frameworks
-- All beta testers and early adopters
-- The academic community for research papers and insights
-
-## 📞 Support
-
-For support, please:
-- Open an issue in the GitHub repository
-- Join our Discord community
-- Check our documentation
-- Contact the maintainers
-- Visit our FAQ page
-- Check our troubleshooting guide
-
-## 🔄 Updates
-
-Stay tuned for regular updates and new features:
-- Enhanced ML models
-- Additional sketch types support
-- Improved user interface
-- Performance optimizations
-- New collaboration features
-- Mobile app development
-- Enterprise features
-- Advanced analytics
-- API integrations
-- Community features
+- Srikaran - Initial work
 
 ## 📊 Performance Metrics
 
