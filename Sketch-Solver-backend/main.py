@@ -11,10 +11,15 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+# Update CORS settings for production
+allowed_origins = [
+    "http://localhost:5173",  # Local development
+    "https://*.vercel.app",   # Vercel deployment
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -30,3 +35,7 @@ app.include_router(calculator_router, prefix="/calculate", tags=["calculate"])
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host=SERVER_URL, port=int(PORT), reload=(ENV == "dev"))
+
+
+#Activate venv 
+#venv\Scripts\activate
