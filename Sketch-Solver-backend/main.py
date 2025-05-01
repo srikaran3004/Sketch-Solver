@@ -14,7 +14,7 @@ app = FastAPI(lifespan=lifespan)
 # Update CORS settings for production
 allowed_origins = [
     "http://localhost:5173",  # Local development
-    "https://*.vercel.app",   # Vercel deployment
+    "https://sketch-solver.vercel.app",  # Your Vercel domain
 ]
 
 app.add_middleware(
@@ -23,6 +23,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
 
 

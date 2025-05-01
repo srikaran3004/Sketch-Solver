@@ -8,4 +8,8 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.0
       - key: ENV
-        value: production 
+        value: production
+      - key: SERVER_URL
+        value: 0.0.0.0
+      - key: PORT
+        value: $PORT 
