@@ -1,5 +1,5 @@
 // UI components from Mantine and internal custom Button
-import { ColorSwatch, Group } from '@mantine/core';
+import { ColorSwatch, Group } from '@mantine/core'; //UI components from Mantine for color selection
 import { Button } from '@/components/ui/button';
 
 // React hooks and libraries
