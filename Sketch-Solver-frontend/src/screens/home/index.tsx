@@ -14,12 +14,14 @@ import { SWATCHES } from '@/constants';
 interface GeneratedResult {
     expression: string;
     answer: string;
+    type?: string;
 }
 
 interface Response {
     expr: string;
     result: string;
     assign: boolean;
+    type?: string;
 }
 
 export default function Home() {
@@ -38,7 +40,7 @@ export default function Home() {
     // Load MathJax rendering after new LaTeX expression is added
     useEffect(() => {
         if (latexExpression.length > 0 && window.MathJax) {
-            setTimeout(() => {  
+            setTimeout(() => {
                 window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub]);
             }, 0);
         }
@@ -47,7 +49,7 @@ export default function Home() {
     // If new result arrives from server, trigger LaTeX rendering
     useEffect(() => {
         if (result) {
-            renderLatexToCanvas(result.expression, result.answer);
+            renderLatexToCanvas(result.expression, result.answer, result.type);
         }
     }, [result]);
 
@@ -65,7 +67,7 @@ export default function Home() {
     // Initialize canvas and load MathJax script on mount
     useEffect(() => {
         const canvas = canvasRef.current;
-    
+
         if (canvas) {
             const ctx = canvas.getContext('2d');
             if (ctx) {
@@ -96,8 +98,11 @@ export default function Home() {
     }, []);
 
     // Render a new LaTeX equation to be displayed on canvas
-    const renderLatexToCanvas = (expression: string, answer: string) => {
-        const latex = `\\(\\LARGE{${expression} = ${answer}}\\)`;
+    const renderLatexToCanvas = (expression: string, answer: string, type: string = 'math') => {
+        let latex = `\\(\\LARGE{${expression} = ${answer}}\\)`;
+        if (type === 'text') {
+            latex = `\\(\\LARGE{\\text{${expression}} = \\text{${answer}}}\\)`;
+        }
         setLatexExpression([...latexExpression, latex]);
 
         // Clear drawing on the canvas when rendering result
@@ -153,7 +158,7 @@ export default function Home() {
     // Stop drawing on mouse up or mouse out
     const stopDrawing = () => {
         setIsDrawing(false);
-    };  
+    };
 
     // Send canvas image and variable dict to backend for processing
     const runRoute = async () => {
@@ -210,7 +215,8 @@ export default function Home() {
                 setTimeout(() => {
                     setResult({
                         expression: data.expr,
-                        answer: data.result
+                        answer: data.result,
+                        type: data.type
                     });
                 }, 1000);
             });
@@ -225,7 +231,7 @@ export default function Home() {
                 <Button
                     onClick={() => setReset(true)}
                     className='z-20 bg-black text-white'
-                    variant='default' 
+                    variant='default'
                     color='black'
                 >
                     Reset
